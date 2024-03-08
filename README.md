@@ -1,4 +1,4 @@
-# My React Project
+# Trinity Playground UI
 
 This project is built with React.js. To get it up and running, follow these simple steps:
 
