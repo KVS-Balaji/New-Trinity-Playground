@@ -11,13 +11,10 @@
   },
   "dependencies": {
     "antd": "^5.15.1",
-    "bootstrap": "^5.3.3",
     "diff": "^5.2.0",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
-    "react-select": "^5.8.0",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.5"
   },
