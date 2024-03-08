@@ -39,4 +39,4 @@ This project is built with React.js. To get it up and running, follow these simp
     npm run dev
    ```
 
-* "The app will usually be accessible at http://localhost:5173 (or a similar port) **after** running ```bash npm run dev```."
+* "The app will usually be accessible at http://localhost:5173 (or a similar port) **after** running ```npm run dev```."
