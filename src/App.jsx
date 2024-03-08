@@ -57,7 +57,7 @@ function App() {
     "The government of Portland, Oregon is based on a city commission government system. Elected officials include the mayor, commissioners, and a city auditor. The mayor and commissioners (members of City Council) are responsible for legislative policy and oversee the various bureaus that oversee the day-to-day operation of the city. Portland began using a commission form of government in 1913 following a public vote on May 3 of that year. Each elected official serves a four-year term, without term limits. Each city council member is elected at-large. In 2022, Portland residents approved a ballot measure to replace the commission form of government with a 12-member council elected in four districts using single transferable vote, with a professional city manager appointed by a directly-elected mayor, with the first elections to be held in 2024."
   );
   const [cqtext, setCqtext] = useState(tqtext);
-  const [sidebarToggle, setSidebarToggle] = useState(false);
+  const [sidebarToggle, setSidebarToggle] = useState(true);
   const [queryBox, setQueryBox] = useState(false);
   const ref1 = useRef(null);
   const ref2 = useRef(null);
@@ -68,7 +68,7 @@ function App() {
   const steps = [
     {
       title: "Sidebar",
-      description: "Click here to open the sidebar",
+      description: "Click here to toggle the sidebar",
       placement: "right",
       target: () => ref1.current,
     },
@@ -202,8 +202,14 @@ function App() {
             </div>
           </div>
         </div>
-        <div id="sidebar-toggle" onClick={handleSidebar} ref={ref1}>
-          {sidebarToggle ? <FaAngleLeft /> : <FaAngleRight ref={ref1} />}
+        <div id="sidebar-toggle" onClick={handleSidebar}>
+          {sidebarToggle ? (
+            <div ref={ref1}>
+              <FaAngleLeft />
+            </div>
+          ) : (
+            <FaAngleRight />
+          )}
         </div>
       </div>
       <div

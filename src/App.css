@@ -44,7 +44,7 @@ p {
 }
 
 #displayArea span.highlight {
-    background-color: red;
+    background-color: #e25d5d60;
 }
 
 .tooltip {
