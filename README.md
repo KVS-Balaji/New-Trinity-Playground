@@ -1,21 +1,18 @@
-# My React Project
+# Trinity Playground UI
 
 This project is built with React.js. To get it up and running, follow these simple steps:
 
 ## Prerequisites
 
-1. **Node.js:** You'll need Node.js installed to run this project. If you don't have it:
+* **Node.js and npm:** This project requires Node.js and npm. To check if you have them installed, open your command prompt or terminal and run the following commands:
 
-   - Download the appropriate installer for your operating system from the official Node.js website: https://nodejs.org/
+    ```bash
+    node -v
+    npm -v
+    ```
 
-2. **npm:** npm (Node Package Manager) is usually included with Node.js installation.
+    If you don't have them installed, download Node.js from the official website: https://nodejs.org/
 
-**Check Your Installations:**
-
-Open your command prompt or terminal and run the following commands:
-
-- `node -v` (This should output the Node.js version if installed)
-- `npm -v` (This should output the npm version if installed)
 
 ## Installation
 
@@ -42,4 +39,4 @@ Open your command prompt or terminal and run the following commands:
     npm run dev
    ```
 
-*The app will be accessible at [http://localhost:5173]*
+* The app will usually be accessible at http://localhost:5173 (or a similar port) **after** running ```npm run dev```.
