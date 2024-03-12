@@ -64,12 +64,16 @@ function App() {
   const ref3 = useRef(null);
   const ref4 = useRef(null);
   const ref5 = useRef(null);
+  const dropdownRef = useRef(null);
   const [spin, setSpin] = useState(false);
   const [runEnable, setRunEnable] = useState(true);
+  const [clearEnable, setClearEnable] = useState(false);
+  const [selectedQuery, setSelectedQuery] = useState("");
 
   const handleChange = (e) => {
     setTqtext(e.target.value);
     setCqtext(e.target.value);
+    setSelectedQuery("Input my custom queries");
   };
 
   const handleSidebar = () => {
@@ -84,8 +88,16 @@ function App() {
     setTimeout(() => {
       setRunEnable(true);
       setSpin(false);
-    }, 3000);
-    console.log("Clicked button");
+    }, 100);
+    setClearEnable(true);
+  }
+
+  function handleClear() {
+    setQueryBox(false);
+    setClearEnable(false);
+    if (dropdownRef.current) {
+      dropdownRef.current.clearValue();
+    }
   }
 
   function populateDiv() {
@@ -139,12 +151,15 @@ function App() {
             <div className="dropdown-div" ref={ref2}>
               <label htmlFor="query_type">Query Type:</label>
               <Dropdown
+                ref={dropdownRef}
                 placeholder="Try sample queries"
                 fluid
                 selection
                 options={query_options}
                 className="dropdown"
                 name="query_type"
+                value={selectedQuery}
+                onChange={(data) => setSelectedQuery(data.value)}
               />
             </div>
             <div className="dropdown-div" ref={ref3}>
@@ -188,7 +203,10 @@ function App() {
         className={`maincontent ${sidebarToggle ? "halfscreen" : "fullscreen"}`}
       >
         <div id="run-button" ref={ref5}>
-          <button disabled={!runEnable} onClick={handleRun}>
+          <button
+            disabled={!runEnable}
+            onClick={clearEnable ? handleClear : handleRun}
+          >
             {spin ? (
               <Spin
                 indicator={
@@ -202,7 +220,7 @@ function App() {
                 spinning={spin}
               />
             ) : (
-              <p>Run</p>
+              <p>{clearEnable ? "Clear" : "Run"}</p>
             )}
           </button>
         </div>
