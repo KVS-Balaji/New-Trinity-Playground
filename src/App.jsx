@@ -1,11 +1,11 @@
 import { diffWords } from "diff";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import { Tooltip, Tour } from "antd";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import "semantic-ui-css/semantic.min.css";
 import { Dropdown } from "semantic-ui-react";
 import "./App.css";
-import pfp from "./assets/pfp.png";
 
 const query_options = [
   {
@@ -64,39 +64,8 @@ function App() {
   const ref3 = useRef(null);
   const ref4 = useRef(null);
   const ref5 = useRef(null);
-  const [open, setOpen] = useState(false);
-  const steps = [
-    {
-      title: "Sidebar",
-      description: "Click here to toggle the sidebar",
-      placement: "right",
-      target: () => ref1.current,
-    },
-    {
-      title: "Query",
-      description: "Choose the type of query to run",
-      target: () => ref2.current,
-    },
-    {
-      title: "LLM Endpoint",
-      description: "Choose the  LLM endpoint for your query",
-      target: () => ref3.current,
-    },
-    {
-      title: "Comparing Model",
-      description: "Choose the model to compare with",
-      target: () => ref4.current,
-    },
-    {
-      title: "Run",
-      description: "Click here to run the model",
-      target: () => ref5.current,
-    },
-  ];
-
-  useEffect(() => {
-    setOpen(true);
-  }, []);
+  const [spin, setSpin] = useState(false);
+  const [runEnable, setRunEnable] = useState(true);
 
   const handleChange = (e) => {
     setTqtext(e.target.value);
@@ -110,6 +79,13 @@ function App() {
   function handleRun() {
     populateDiv();
     setQueryBox(true);
+    setSpin(true);
+    setRunEnable(false);
+    setTimeout(() => {
+      setRunEnable(true);
+      setSpin(false);
+    }, 3000);
+    console.log("Clicked button");
   }
 
   function populateDiv() {
@@ -121,7 +97,6 @@ function App() {
     if (displayElement) {
       displayElement.innerHTML = "";
     }
-    console.log(complete_arr);
 
     for (let i = 0; i < complete_arr.length; i++) {
       if (complete_arr[i].value.match("^\\[")) {
@@ -179,6 +154,8 @@ function App() {
                 fluid
                 selection
                 options={llm_options}
+                defaultValue={"GPT4"}
+                disabled={true}
                 className="dropdown"
                 name="query_type"
               />
@@ -190,15 +167,10 @@ function App() {
                 fluid
                 selection
                 options={model_options}
+                defaultValue={"Presidio"}
                 className="dropdown"
                 name="query_type"
               />
-            </div>
-          </div>
-          <div id="login">
-            <div id="profile">
-              <img src={pfp} alt="Profile Picture" />
-              <p>Username</p>
             </div>
           </div>
         </div>
@@ -216,7 +188,23 @@ function App() {
         className={`maincontent ${sidebarToggle ? "halfscreen" : "fullscreen"}`}
       >
         <div id="run-button" ref={ref5}>
-          <button onClick={handleRun}>Run</button>
+          <button disabled={!runEnable} onClick={handleRun}>
+            {spin ? (
+              <Spin
+                indicator={
+                  <LoadingOutlined
+                    style={{
+                      fontSize: 25,
+                      color: "white",
+                    }}
+                  />
+                }
+                spinning={spin}
+              />
+            ) : (
+              <p>Run</p>
+            )}
+          </button>
         </div>
         <div id="trinity-div">
           <div id="trinity-model">
@@ -275,7 +263,6 @@ function App() {
           </div>
         </div>
       </div>
-      <Tour open={open} onClose={() => setOpen(false)} steps={steps} />
     </div>
   );
 }
