@@ -7,6 +7,8 @@ import "semantic-ui-css/semantic.min.css";
 import { Dropdown } from "semantic-ui-react";
 import "./App.css";
 
+//import statements
+
 const query_options = [
   {
     key: "For Engineering Team",
